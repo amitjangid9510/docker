@@ -11,6 +11,12 @@ EXPOSE 5173
 
 CMD ["npm", "run", "dev", "--", "--host"]
 
-# docker run -it --rm -v ${PWD}:/app -w /app node:latest bash
-# docker build -t react-vite-app .       //create docker conatiner in current directory with .
-# docker run -it --rm -p 5173:5173 -v "C:/Users/jijan/OneDrive/Desktop/Amit/react-vite-docker:/app" -w /app react-vite-app    //Run container in windows                
+
+
+# cd C:/Users/jijan/OneDrive/Desktop/Amit/react-vite-docker
+# docker run -it --rm -v "C:/Users/jijan/OneDrive/Desktop/Amit/react-vite-docker:/app" -w /app node:latest bash  //run a temp node js conatiner
+# Inside the container shell, create the Vite React app:
+# now past vite config for hot reloading.
+# docker build -t react-vite-app .  //create docker image
+# docker run -it --rm -p 5173:5173 -v "C:/Users/jijan/OneDrive/Desktop/Amit/react-vite-docker:/app" -w /app react-vite-app    //Run container in windows with port mapping                
+    
