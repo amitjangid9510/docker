@@ -1,0 +1,16 @@
+FROM node:latest
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 5173
+
+CMD ["npm", "run", "dev", "--", "--host"]
+
+
+# docker build -t react-vite-app .       //create docker conatiner in current directory with .
+# docker run -it --rm -p 5173:5173 -v "C:/Users/jijan/OneDrive/Desktop/Amit/react-vite-docker:/app" -w /app react-vite-app    //Run container in windows                
