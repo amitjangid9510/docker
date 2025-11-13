@@ -1,0 +1,39 @@
+
+ARG NODE_VERSION=24.7.0-alpine
+
+FROM node:${NODE_VERSION} AS dev
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN --mount=type=cache,target=/root/.npm npm install
+
+COPY . .
+
+EXPOSE 5173
+
+CMD ["npm", "run", "dev"]
+
+
+
+docker run --rm -v ${PWD}:/app -w /app node:24.7.0-alpine sh -c "npm create vite@latest docker-frontend -- --template react && cd docker-frontend && npm install"
+
+docker run --rm -v ${PWD}:/app -w /app node:24.7.0-alpine npm install axios
+docker run --rm -v ${PWD}:/app -w /app node:24.7.0-alpine npm uninstall axios
+
+
+
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  base: "/",
+  plugins: [react()],
+  server: {
+    host: true,
+    port: 5173,
+    strictPort: true,
+  },
+});
+    
